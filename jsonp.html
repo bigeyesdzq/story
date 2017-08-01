@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    用户名: <input type="text">
+    密  码: <input type="text">
+    <button id="btn">提交</button>
+    <div id = "show">
+    </div>
+</body>
+</html>
+<script>
+    //http://myitcast.com/demoJsonp.php  我要请求的url地址
+    window.onload = function(){
+        var btn = document.getElementById('btn');
+        btn.onclick = function(){
+            var name = document.getElementsByTagName('input')[0].value;
+            var pw = document.getElementsByTagName('input')[1].value;
+            
+            // 因为我请求的url是不同的网址 会发生跨域 所以只能使用jsonp的方式访问
+            var script = document.createElement('script');
+            script.src = "http://myitcast.com/demoJsonp.php?username="+name+"&password="+pw+"&callback=success2";
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(script);
+        }
+    }
+        // success(data);  {"username":"admin","password":"123"}
+    function success(data){
+        var div = document.getElementById('show');
+        div.innerHTML = "用户名:"+data.username+"………………"+"密 码:"+data.password;
+        div.style.height = '100px';
+        div.style.width = "500px";
+        div.style.color = "#fff";
+        div.style.backgroundColor = "hotpink";
+    }
+    function success1(data){
+        var div = document.getElementById('show');
+        div.innerHTML = "用户名:"+data.username+"………………"+"密 码:"+data.password;
+        div.style.height = '100px';
+        div.style.width = "500px";
+        div.style.color = "#fff";
+        div.style.backgroundColor = "yellow";
+    }
+    function success2(data){
+        var div = document.getElementById('show');
+        div.innerHTML = "用户名:"+data.username+"………………"+"密 码:"+data.password;
+        div.style.height = '100px';
+        div.style.width = "500px";
+        div.style.color = "#fff";
+        div.style.backgroundColor = "red";
+    }
+   
+</script>
